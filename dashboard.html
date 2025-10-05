@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Farmer Space Alert Dashboard</title>
+    <meta http-equiv="refresh" content="5"> 
+    <style>
+        body { font-family: sans-serif; text-align: center; margin: 0; padding-top: 50px; background-color: #f4f4f9; }
+        .alert-box { 
+            padding: 50px; 
+            border-radius: 20px; 
+            margin: 30px auto; 
+            width: 90%; 
+            max-width: 700px; 
+            color: white; 
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease-in-out;
+        }
+        .red { background-color: #e74c3c; }
+        .yellow { background-color: #f39c12; }
+        .green { background-color: #2ecc71; }
+        .initializing, .error { background-color: #34495e; }
+        h1 { font-size: 4em; margin-bottom: 5px; }
+        h2 { margin-top: 0; font-size: 1.5em; }
+        p { font-size: 1.2em; margin: 10px 0; }
+        .details { background-color: #f0f0f0; color: #333; padding: 20px; border-radius: 10px; margin-top: 30px; }
+        .data-point { font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Space Weather Monitoring</h1>
+    
+    <div class="alert-box {{ status.risk | lower }}">
+        <p style="font-size: 1.5em; margin-bottom: 0;">Current Risk Level:</p>
+        <h1>{{ status.risk.upper() }}</h1>
+    </div>
+
+    <div class="details">
+        <h2>Latest Data Check</h2>
+        <p>Observed Kp Index: <span class="data-point">{{ status.kp_value }}</span></p>
+        <p>Observed Solar Flare Class: <span class="data-point">{{ status.flare_class }}</span></p>
+        <p>Observed CME Speed: <span class="data-point">{{ status.cme_speed }} km/s</span></p>
+        <p style="font-size: 0.9em; margin-top: 20px;">Last Updated: {{ status.time }}</p>
+    </div>
+
+    <p style="margin-top: 50px; color: #555;">WhatsApp alerts are sent only when the risk level changes!</p>
+</body>
+</html>
